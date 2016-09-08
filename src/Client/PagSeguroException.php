@@ -1,7 +1,8 @@
 <?php
 namespace PHPSC\PagSeguro\Client;
 
-use GuzzleHttp\Message\Response;
+//use GuzzleHttp\Message\Response;
+use GuzzleHttp\Psr7\Response;
 
 class PagSeguroException extends \RuntimeException
 {
@@ -27,8 +28,10 @@ class PagSeguroException extends \RuntimeException
         }
 
         $message = 'Some errors occurred:';
+        $xml = new \SimpleXMLElement($response->getBody()->getContents());
 
-        foreach ($response->xml()->error as $error) {
+        //foreach ($response->xml()->error as $error) {
+        foreach ($xml->error as $error) {
             $message .= PHP_EOL . '[' . (string) $error->code . '] ' . (string) $error->message;
         }
 
