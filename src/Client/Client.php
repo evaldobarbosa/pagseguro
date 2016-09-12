@@ -22,7 +22,7 @@ class Client
     public function __construct(HttpClient $client = null)
     {
         $this->client = $client ?: new HttpClient();
-        $this->client->getEmitter()->on('error', [$this, 'handleError']);
+        //$this->client->getEmitter()->on('error', [$this, 'handleError']);
     }
 
     /**
