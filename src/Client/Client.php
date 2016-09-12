@@ -56,7 +56,8 @@ class Client
             ]
         );
 
-        return $response->xml();
+        //return $response->xml();
+        return $this->parseResponse($response);
     }
 
     /**
@@ -68,6 +69,11 @@ class Client
     {
         $response = $this->client->get($url, ['verify' => false]);
 
-        return $response->xml();
+        //return $response->xml();
+        return $this->parseResponse($response);
+    }
+
+    protected function parseResponse ($response) {
+        return new SimpleXMLElement($response->getBody()->getContents());
     }
 }
